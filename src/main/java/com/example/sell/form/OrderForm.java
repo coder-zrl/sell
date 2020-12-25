@@ -1,9 +1,8 @@
 package com.example.sell.form;
 
 
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
-import org.springframework.scheduling.support.SimpleTriggerContext;
+
 
 /**
  * 做表单验证的
