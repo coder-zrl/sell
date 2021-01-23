@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="common/header :: header"></head>
+<body>
+    <div id="wrapper" class="toggled">
+        <!--侧边栏-->
+        <nav th:replace="common/nav :: main"></nav>
+        <div id="page-content-wrapper">
+            <div class="container">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <form role="form" method="post" th:action="@{/seller/product/save}">
+                            <div class="form-group">
+                                <label>名称</label>
+                                <input name="productName" type="text" class="form-control" th:value="${productInfo}!=null?${productInfo.getProductName()}:null"/>
+                            </div>
+                            <div class="form-group">
+                                <label>价格</label>
+                                <input name="productPrice" type="text" class="form-control" th:value="${productInfo}!=null?${productInfo.getProductPrice()}:null"/>
+                            </div>
+                            <div class="form-group">
+                                <label>库存</label>
+                                <input name="productStock" type="number" class="form-control" th:value="${productInfo}!=null?${productInfo.getProductStock()}:null"/>
+                            </div>
+                            <div class="form-group">
+                                <label>描述</label>
+                                <input name="productDescription" type="text" class="form-control" th:value="${productInfo}!=null?${productInfo.getProductDescription()}:null"/>
+                            </div>
+                            <div class="form-group">
+                                <label>图片</label>
+                                <img height="100" width="100" th:if="${productInfo}!=null" th:src="${productInfo}!=null?${productInfo.getProductIcon()}:null">
+                                <input name="productIcon" type="text" class="form-control" th:value="${productInfo}!=null?${productInfo.getProductIcon()}:null"/>
+                            </div>
+                            <div class="form-group">
+                                <label>类目</label>
+                                <select name="categoryType" class="form-control">
+                                    <option th:each="category:${categoryList}" th:value="${category.getCategoryType()}" th:text="${category.getCategoryName()}" th:selected="${productInfo!=null and category.getCategoryType()==productInfo.getCategoryType()}?${category.getCategoryName()}"></option>
+                                </select>
+                            </div>
+<!--                            隐藏的字段-->
+                            <input hidden type="text" name="productId" th:value="${productInfo}!=null?${productInfo.getProductId()}:null">
+                            <button type="submit" class="btn btn-default">提交</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
